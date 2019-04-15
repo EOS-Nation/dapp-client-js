@@ -1,0 +1,46 @@
+{
+  "name": "dapp-network",
+  "version": "0.1.0",
+  "description": "DAPP Network",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepublishOnly": "tsc",
+    "test": "jest --coverage",
+    "posttest": "tslint -p .",
+    "docs": "tsc && documentation readme dist/index.js -s API"
+  },
+  "author": "Denis Carriere <denis@eosnation.io>",
+  "contributors": [
+    "Denis Carriere <denis@eosnation.io>"
+  ],
+  "homepage": "https://github.com/EOS-Nation/dapp-network-js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/isomorphic-fetch": "*",
+    "@types/jest": "*",
+    "@types/node": "*",
+    "documentation": "*",
+    "eosjs": "^20.0.0",
+    "isomorphic-fetch": "*",
+    "jest": "*",
+    "ts-jest": "*",
+    "ts-node": "*",
+    "tslint": "*",
+    "typescript": "*"
+  },
+  "dependencies": {},
+  "directories": {
+    "example": "examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EOS-Nation/dapp-network-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EOS-Nation/dapp-network-js/issues"
+  }
+}
