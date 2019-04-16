@@ -5,3 +5,5 @@
 // reward
 // stat
 // statext
+
+export const foo = "bar";

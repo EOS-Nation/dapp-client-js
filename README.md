@@ -1,17 +1,17 @@
-# DAPP Network Javascript (TS) Library
+# DAPP JavaScript/TypeScript Client Library
 
 ## Installation
 
 Using Yarn:
 
 ```bash
-yarn add dapp-network
+yarn add dapp-client
 ```
 
 or using NPM:
 
 ```bash
-npm install --save dapp-network
+npm install --save dapp-client
 ```
 
 ## Quick Start
@@ -19,21 +19,21 @@ npm install --save dapp-network
 **CommonJS**
 
 ```js
-const { JsonRpc } = require("dapp-network")
+const { DappClient } = require("dapp-client")
 const fetch = require("isomorphic-fetch")
 
 const endpoint = "https://dsp.eosn.io"
-const rpc = new JsonRpc(endpoint, { fetch })
+const client = new DappClient({ endpoint, fetch })
 ```
 
 **TypeScript**
 
 ```ts
-import { JsonRpc } from "dapp-network"
+import { DappClient } from "dapp-client"
 import fetch from "isomorphic-fetch"
 
 const endpoint = "https://dsp.eosn.io"
-const rpc = new JsonRpc(endpoint, { fetch })
+const client = new DappClient({ endpoint, fetch })
 ```
 
 ## ENV Variables
