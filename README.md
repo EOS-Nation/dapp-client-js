@@ -14,6 +14,12 @@ or using NPM:
 npm install --save dapp-client
 ```
 
+or using latest:
+
+```bash
+npm install --save git+ssh://git@github.com:EOS-Nation/dapp-client-js.git
+```
+
 ## Quick Start
 
 **CommonJS**
@@ -23,7 +29,7 @@ const { DappClient } = require("dapp-client")
 const fetch = require("isomorphic-fetch")
 
 const endpoint = "https://dsp.eosn.io"
-const client = new DappClient({ endpoint, fetch })
+const client = new DappClient(endpoint, { fetch })
 ```
 
 **TypeScript**
@@ -33,13 +39,7 @@ import { DappClient } from "dapp-client"
 import fetch from "isomorphic-fetch"
 
 const endpoint = "https://dsp.eosn.io"
-const client = new DappClient({ endpoint, fetch })
-```
-
-## ENV Variables
-
-```bash
-DSP_ENDPOINT=<Enter DSP Endpoint>  # "https://dsp.eosn.io"
+const client = new DappClient(endpoint, { fetch })
 ```
 
 ## Supported Endpoints
@@ -113,6 +113,8 @@ DAPP
 #### Examples
 
 ```javascript
+import { names } from "dapp-client"
+
 names.DAPP // => "......2ke1.o4"
 ```
 
@@ -132,7 +134,7 @@ DAPP Client
 
 ```javascript
 const endpoint = "https://dsp.eosn.io"
-const client = new DappClient({ endpoint, fetch })
+const client = new DappClient(endpoint, { fetch })
 ```
 
 #### get_table_package

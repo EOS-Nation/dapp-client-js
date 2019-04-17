@@ -14,7 +14,7 @@ import { HttpClient, Fetch } from "./HttpClient";
  * @example
  *
  * const endpoint = "https://dsp.eosn.io"
- * const client = new DappClient({ endpoint, fetch })
+ * const client = new DappClient(endpoint, { fetch })
  */
 export class DappClient extends HttpClient {
     public dappservices = "dappservices";
@@ -22,12 +22,8 @@ export class DappClient extends HttpClient {
 
     constructor(endpoint: string, options: {
         fetch?: Fetch,
-        dappservices?: string,
-        ipfsservice1?: string,
     } = {}) {
         super(endpoint, options);
-        this.dappservices = options.dappservices || this.dappservices;
-        this.ipfsservice1 = options.ipfsservice1 || this.ipfsservice1;
     }
 
     /**
