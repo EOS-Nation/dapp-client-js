@@ -5,13 +5,14 @@ import { HttpClient, Fetch } from "./HttpClient";
 /**
  * DAPP Client
  *
+ * @name DappClient
  * @param {string} endpoint dsp endpoint
  * @param {object} [options={}] optional params
  * @param {Fetch} [options.fetch=global.fetch] fetch
  * @example
  *
  * const endpoint = "https://dsp.eosn.io"
- * const rpc = new DappClient({ endpoint, fetch })
+ * const client = new DappClient({ endpoint, fetch })
  */
 export class DappClient extends HttpClient {
     constructor(endpoint: string, options: {
@@ -44,7 +45,7 @@ export class DappClient extends HttpClient {
      * const response = await rpc.get_table_rows("<code>", "<scope>", "<table>");
      * console.log(response);
      */
-    public get_table_rows<T>(code: string, scope: string, table: string, options: {
+    public get_table_rows<T = unknown>(code: string, scope: string, table: string, options: {
         index_position?: number,
         json?: boolean,
         key_type?: string,
@@ -97,14 +98,14 @@ export class DappClient extends HttpClient {
      * const response = await rpc.get_table_by_scope();
      * console.log(response);
      */
-    public get_table_by_scope<T>(code: string, options: {
+    public get_table_by_scope(code: string, options: {
         table?: string,
         lower_bound?: string,
         upper_bound?: string,
         limit?: number,
         reverse?: boolean,
     } = {}) {
-        return this.post<GetTableByScope<T>>(V1_GET_TABLE_BY_SCOPE, {
+        return this.post<GetTableByScope>(V1_GET_TABLE_BY_SCOPE, {
             code,
             table: options.table,
             lower_bound: options.lower_bound,

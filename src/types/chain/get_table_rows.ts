@@ -1,4 +1,4 @@
-export interface GetTableRows<T> {
+export interface GetTableRows<T = unknown> {
   rows: T[];
   more: boolean;
 }

@@ -63,13 +63,14 @@ declare const global: any;
  * Default HTTP Client
  *
  * @private
+ * @name DappClient
  * @param {string} endpoint dsp endpoint
  * @param {object} [options={}] optional params
  * @param {Fetch} [options.fetch=global.fetch] fetch
  * @example
  *
  * const endpoint = "https://dsp.eosn.io"
- * const rpc = new DefaultHttpClient(endpoint, { fetch })
+ * const client = new HttpClient(endpoint, { fetch })
  */
 export class HttpClient {
     public endpoint: string;

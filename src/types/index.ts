@@ -11,5 +11,9 @@ export { Action } from "./eosio/action_trace";
 // error
 export { RpcError, RpcStatusError } from "./error";
 
+// names
+import * as names from "./names";
+export { names };
+
 // endpoints
 export * from "./endpoints";
