@@ -1,5 +1,5 @@
 import { V1_GET_TABLE_ROWS, V1_GET_TABLE_BY_SCOPE } from "../types/endpoints";
-import { GetTableRows, GetTableByScope } from "../types";
+import { GetTableRows, GetTableByScope, Package, Accountext, names } from "../types";
 import { HttpClient, Fetch } from "./HttpClient";
 
 /**
@@ -8,6 +8,8 @@ import { HttpClient, Fetch } from "./HttpClient";
  * @name DappClient
  * @param {string} endpoint dsp endpoint
  * @param {object} [options={}] optional params
+ * @param {string} [options.dappservices="dappservices"] dappservices code
+ * @param {string} [options.ipfsservice1="ipfsservice1"] ipfsservice1 code
  * @param {Fetch} [options.fetch=global.fetch] fetch
  * @example
  *
@@ -15,10 +17,67 @@ import { HttpClient, Fetch } from "./HttpClient";
  * const client = new DappClient({ endpoint, fetch })
  */
 export class DappClient extends HttpClient {
+    public dappservices = "dappservices";
+    public ipfsservice1 = "ipfsservice1";
+
     constructor(endpoint: string, options: {
         fetch?: Fetch,
+        dappservices?: string,
+        ipfsservice1?: string,
     } = {}) {
         super(endpoint, options);
+        this.dappservices = options.dappservices || this.dappservices;
+        this.ipfsservice1 = options.ipfsservice1 || this.ipfsservice1;
+    }
+
+    /**
+     * Get TABLE package
+     *
+     * @param {object} [options={}] optional params
+     * @param {string} [options.lower_bound] Filters results to return the first element that is not less than provided value in set
+     * @param {string} [options.upper_bound] Filters results to return the first element that is greater than provided value in set
+     * @param {number} [options.limit=10] Limit the result amount
+     * @param {boolean} [options.show_payer=false] Show Payer
+     * @example
+     *
+     * const response = await client.get_table_package();
+     *
+     * for (const row of response.rows) {
+     *   // => row
+     * }
+     */
+    public get_table_package(options: {
+        lower_bound?: string,
+        upper_bound?: string,
+        limit?: number,
+        show_payer?: boolean,
+    } = {}) {
+        return this.get_table_rows<Package>(this.dappservices, this.dappservices, "package", options);
+    }
+
+    /**
+     * Get TABLE accountext
+     *
+     * @param {object} [options={}] optional params
+     * @param {string} [options.lower_bound] Filters results to return the first element that is not less than provided value in set
+     * @param {string} [options.upper_bound] Filters results to return the first element that is greater than provided value in set
+     * @param {number} [options.limit=10] Limit the result amount
+     * @param {boolean} [options.show_payer=false] Show Payer
+     * @example
+     *
+     * const response = await client.get_table_accountext();
+     *
+     * for (const row of response.rows) {
+     *   // => row
+     * }
+     */
+    public get_table_accountext(options: {
+        lower_bound?: string,
+        upper_bound?: string,
+        limit?: number,
+        show_payer?: boolean,
+    } = {}) {
+        return this.get_table_rows<Accountext>(this.dappservices, names.DAPP, "accountext", options);
     }
 
     /**
@@ -30,15 +89,15 @@ export class DappClient extends HttpClient {
      * @param {string} table The name of the table to query
      * @param {string} scope The account to which this data belongs
      * @param {object} [options={}] optional params
+     * @param {string} [options.lower_bound] Filters results to return the first element that is not less than provided value in set
+     * @param {string} [options.upper_bound] Filters results to return the first element that is greater than provided value in set
+     * @param {number} [options.limit=10] Limit the result amount
+     * @param {boolean} [options.show_payer=false] Show Payer
      * @param {boolean} [options.json=true] JSON response
      * @param {number} [options.index_position=1] Position of the index used
      * @param {string} [options.key_type] Type of key specified by index_position (for example - uint64_t or name)
-     * @param {string} [options.lower_bound] Filters results to return the first element that is not less than provided value in set
-     * @param {string} [options.upper_bound] Filters results to return the first element that is greater than provided value in set
      * @param {string} [options.table_key] Table Key
      * @param {string} [options.encode_type] Encode type
-     * @param {boolean} [options.show_payer=false] Show Payer
-     * @param {number} [options.limit=10] Limit the result amount
      * @returns {Promise<GetTableRows>} table rows
      * @example
      *
@@ -54,10 +113,12 @@ export class DappClient extends HttpClient {
         table_key?: string,
         encode_type?: string,
         show_payer?: boolean,
+        limit?: number,
     } = {}) {
         // Optional params
         const json = options.json === false ? false : true;
         const index_position = options.index_position || 1;
+        const limit = options.limit || 10;
         const key_type = options.key_type || "";
         const table_key = options.table_key || "";
         const lower_bound = options.lower_bound || "";
@@ -77,6 +138,7 @@ export class DappClient extends HttpClient {
             upper_bound,
             encode_type,
             show_payer,
+            limit,
         });
     }
 
@@ -91,7 +153,7 @@ export class DappClient extends HttpClient {
      * @param {string} [options.lower_bound] Filters results to return the first element that is not less than provided value in set
      * @param {string} [options.upper_bound] Filters results to return the first element that is greater than provided value in set
      * @param {number} [options.limit] Limit number of results returned.
-     * @param {boolean} [options.reverse] Reverse the order of returned results
+     * @param {boolean} [options.reverse=false] Reverse the order of returned results
      * @returns {Promise<GetTableByScope>} table rows
      * @example
      *
@@ -105,13 +167,20 @@ export class DappClient extends HttpClient {
         limit?: number,
         reverse?: boolean,
     } = {}) {
+        // Optional params
+        const limit = options.limit || 10;
+        const lower_bound = options.lower_bound || "";
+        const upper_bound = options.upper_bound || "";
+        const table = options.table || "";
+        const reverse = options.reverse === true ? true : false;
+
         return this.post<GetTableByScope>(V1_GET_TABLE_BY_SCOPE, {
             code,
-            table: options.table,
-            lower_bound: options.lower_bound,
-            upper_bound: options.upper_bound,
-            limit: options.limit,
-            reverse: options.reverse,
+            table,
+            lower_bound,
+            upper_bound,
+            limit,
+            reverse,
         });
     }
 }

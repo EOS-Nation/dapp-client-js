@@ -1,5 +1,4 @@
 import { client } from "./client";
-import { Package } from "../src";
 
 (async () => {
     const response = await client.get_table_by_scope("dappservices");

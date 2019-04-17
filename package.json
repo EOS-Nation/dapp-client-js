@@ -1,7 +1,7 @@
 {
-  "name": "dapp-network",
+  "name": "dapp-client",
   "version": "0.1.0",
-  "description": "DAPP Network",
+  "description": "DAPP JavaScript/TypeScript Client Library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

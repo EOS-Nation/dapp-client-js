@@ -61,44 +61,50 @@ DSP_ENDPOINT=<Enter DSP Endpoint>  # "https://dsp.eosn.io"
 -   [DappClient](#dappclient)
     -   [Parameters](#parameters)
     -   [Examples](#examples-1)
-    -   [get_table_rows](#get_table_rows)
+    -   [get_table_package](#get_table_package)
         -   [Parameters](#parameters-1)
         -   [Examples](#examples-2)
-    -   [get_table_by_scope](#get_table_by_scope)
+    -   [get_table_accountext](#get_table_accountext)
         -   [Parameters](#parameters-2)
         -   [Examples](#examples-3)
+    -   [get_table_rows](#get_table_rows)
+        -   [Parameters](#parameters-3)
+        -   [Examples](#examples-4)
+    -   [get_table_by_scope](#get_table_by_scope)
+        -   [Parameters](#parameters-4)
+        -   [Examples](#examples-5)
 -   [claimrewards](#claimrewards)
-    -   [Parameters](#parameters-3)
--   [close](#close)
-    -   [Parameters](#parameters-4)
--   [closeprv](#closeprv)
     -   [Parameters](#parameters-5)
--   [create](#create)
+-   [close](#close)
     -   [Parameters](#parameters-6)
--   [issue](#issue)
+-   [closeprv](#closeprv)
     -   [Parameters](#parameters-7)
--   [modifypkg](#modifypkg)
+-   [create](#create)
     -   [Parameters](#parameters-8)
--   [open](#open)
+-   [issue](#issue)
     -   [Parameters](#parameters-9)
--   [refund](#refund)
+-   [modifypkg](#modifypkg)
     -   [Parameters](#parameters-10)
--   [regpkg](#regpkg)
+-   [open](#open)
     -   [Parameters](#parameters-11)
--   [retire](#retire)
+-   [refund](#refund)
     -   [Parameters](#parameters-12)
--   [selectpkg](#selectpkg)
+-   [regpkg](#regpkg)
     -   [Parameters](#parameters-13)
--   [stake](#stake)
+-   [retire](#retire)
     -   [Parameters](#parameters-14)
--   [transfer](#transfer)
+-   [selectpkg](#selectpkg)
     -   [Parameters](#parameters-15)
--   [unstake](#unstake)
+-   [stake](#stake)
     -   [Parameters](#parameters-16)
--   [usage](#usage)
+-   [transfer](#transfer)
     -   [Parameters](#parameters-17)
--   [xsignal](#xsignal)
+-   [unstake](#unstake)
     -   [Parameters](#parameters-18)
+-   [usage](#usage)
+    -   [Parameters](#parameters-19)
+-   [xsignal](#xsignal)
+    -   [Parameters](#parameters-20)
 
 ### DAPP
 
@@ -118,6 +124,8 @@ DAPP Client
 
 -   `endpoint` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** dsp endpoint
 -   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** optional params (optional, default `{}`)
+    -   `options.dappservices` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** dappservices code (optional, default `"dappservices"`)
+    -   `options.ipfsservice1` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** ipfsservice1 code (optional, default `"ipfsservice1"`)
     -   `options.fetch` **[Fetch](https://developer.mozilla.org/docs/Web/API/Fetch_API)** fetch (optional, default `global.fetch`)
 
 #### Examples
@@ -125,6 +133,50 @@ DAPP Client
 ```javascript
 const endpoint = "https://dsp.eosn.io"
 const client = new DappClient({ endpoint, fetch })
+```
+
+#### get_table_package
+
+Get TABLE package
+
+##### Parameters
+
+-   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** optional params (optional, default `{}`)
+    -   `options.lower_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is not less than provided value in set
+    -   `options.upper_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is greater than provided value in set
+    -   `options.limit` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Limit the result amount (optional, default `10`)
+    -   `options.show_payer` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Show Payer (optional, default `false`)
+
+##### Examples
+
+```javascript
+const response = await client.get_table_package();
+
+for (const row of response.rows) {
+  // => row
+}
+```
+
+#### get_table_accountext
+
+Get TABLE accountext
+
+##### Parameters
+
+-   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** optional params (optional, default `{}`)
+    -   `options.lower_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is not less than provided value in set
+    -   `options.upper_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is greater than provided value in set
+    -   `options.limit` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Limit the result amount (optional, default `10`)
+    -   `options.show_payer` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Show Payer (optional, default `false`)
+
+##### Examples
+
+```javascript
+const response = await client.get_table_accountext();
+
+for (const row of response.rows) {
+  // => row
+}
 ```
 
 #### get_table_rows
@@ -139,15 +191,15 @@ Returns an object containing rows from the specified table.
 -   `scope` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The account to which this data belongs
 -   `table` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The name of the table to query
 -   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** optional params (optional, default `{}`)
+    -   `options.lower_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is not less than provided value in set
+    -   `options.upper_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is greater than provided value in set
+    -   `options.limit` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Limit the result amount (optional, default `10`)
+    -   `options.show_payer` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Show Payer (optional, default `false`)
     -   `options.json` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** JSON response (optional, default `true`)
     -   `options.index_position` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Position of the index used (optional, default `1`)
     -   `options.key_type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Type of key specified by index_position (for example - uint64_t or name)
-    -   `options.lower_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is not less than provided value in set
-    -   `options.upper_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is greater than provided value in set
     -   `options.table_key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Table Key
     -   `options.encode_type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Encode type
-    -   `options.show_payer` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Show Payer (optional, default `false`)
-    -   `options.limit` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Limit the result amount (optional, default `10`)
 
 ##### Examples
 
@@ -172,7 +224,7 @@ Returns an object containing rows from the specified table.
     -   `options.lower_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is not less than provided value in set
     -   `options.upper_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is greater than provided value in set
     -   `options.limit` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?** Limit number of results returned.
-    -   `options.reverse` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** Reverse the order of returned results
+    -   `options.reverse` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Reverse the order of returned results (optional, default `false`)
 
 ##### Examples
 
