@@ -1,5 +1,5 @@
 import fetch from "isomorphic-fetch";
-import { JsonRpc } from "..";
+import { DappClient } from "../src";
 
 const endpoint = process.env.DSP_ENDPOINT || "https://dsp.eosn.io";
-export const rpc = new JsonRpc(endpoint, { fetch });
+export const client = new DappClient(endpoint, { fetch });

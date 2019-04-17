@@ -1,10 +1,8 @@
 // TypeScript Definitions
-export * from "./types/action_trace";
-export * from "./types/api";
-export * from "./types/endpoints";
-export * from "./types/error";
+export * from "./types";
 
 // Dapp API
-export * from "./client/DappClient";
-export * from "./actions";
-export * from "./tables";
+export { DappClient } from "./client/DappClient";
+import * as actions from "./actions";
+import * as tables from "./tables";
+export { actions, tables };

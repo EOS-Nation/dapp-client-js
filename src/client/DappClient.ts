@@ -1,5 +1,5 @@
 import { V1_GET_TABLE_ROWS, V1_GET_TABLE_BY_SCOPE } from "../types/endpoints";
-import { GetTableRows, GetTableByScope } from "../types/api";
+import { GetTableRows, GetTableByScope } from "../types";
 import { HttpClient, Fetch } from "./HttpClient";
 
 /**
@@ -8,25 +8,16 @@ import { HttpClient, Fetch } from "./HttpClient";
  * @param {string} endpoint dsp endpoint
  * @param {object} [options={}] optional params
  * @param {Fetch} [options.fetch=global.fetch] fetch
- * @param {string} [options.dappservices=] dappservices code
- * @param {string} [options.ipfsservice1] ipfsservice1 code
  * @example
  *
  * const endpoint = "https://dsp.eosn.io"
  * const rpc = new DappClient({ endpoint, fetch })
  */
 export class DappClient extends HttpClient {
-    public dappservices: string;
-    public ipfsservice1: string;
-
     constructor(endpoint: string, options: {
         fetch?: Fetch,
-        dappservices?: string,
-        ipfsservice1?: string,
     } = {}) {
         super(endpoint, options);
-        this.dappservices = options.dappservices || "dappservices";
-        this.ipfsservice1 = options.ipfsservice1 || "ipfsservice1";
     }
 
     /**
