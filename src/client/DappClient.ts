@@ -40,10 +40,23 @@ export class DappClient extends HttpClient {
      * @param {boolean} [options.show_payer=false] Show Payer
      * @example
      *
-     * const response = await client.get_table_package();
+     * const response = await client.get_table_package({limit: 500});
      *
      * for (const row of response.rows) {
-     *   // => row
+     *     console.log(row);
+     *     // {
+     *     //     id: 9,
+     *     //     api_endpoint: 'https://dsp.eosn.io',
+     *     //     package_json_uri: 'https://eosnation.io/package1.dsp-package.json',
+     *     //     package_id: 'package1',
+     *     //     service: 'ipfsservice1',
+     *     //     provider: 'eosnationdsp',
+     *     //     quota: '500.0000 QUOTA',
+     *     //     package_period: 86400,
+     *     //     min_stake_quantity: '10000.0000 DAPP',
+     *     //     min_unstake_period: 3600,
+     *     //     enabled: 1
+     *     // }
      * }
      */
     public get_table_package(options: {
@@ -65,10 +78,24 @@ export class DappClient extends HttpClient {
      * @param {boolean} [options.show_payer=false] Show Payer
      * @example
      *
-     * const response = await client.get_table_accountext();
+     * const response = await client.get_table_accountext({limit: 500});
      *
      * for (const row of response.rows) {
-     *   // => row
+     *     console.log(row);
+     *     // {
+     *     //     id: 29,
+     *     //     account: 'eosnationdsp',
+     *     //     service: 'ipfsservice1',
+     *     //     provider: 'eosnationdsp',
+     *     //     quota: '0.0001 QUOTA',
+     *     //     balance: '255101.1461 DAPP',
+     *     //     last_usage: '1555466031000',
+     *     //     last_reward: '1555466031000',
+     *     //     package: 'package2',
+     *     //     pending_package: 'package2',
+     *     //     package_started: '1555466031000',
+     *     //     package_end: '1555469631000'
+     *     // }
      * }
      */
     public get_table_accountext(options: {
