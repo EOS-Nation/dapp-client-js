@@ -1,5 +1,5 @@
-import { V1_GET_TABLE_ROWS, V1_GET_TABLE_BY_SCOPE } from "../types/endpoints";
-import { GetTableRows, GetTableByScope, Package, Accountext, names } from "../types";
+import { V1_GET_TABLE_ROWS, V1_GET_TABLE_BY_SCOPE, V1_GET_INFO } from "../types/endpoints";
+import { GetInfo, GetTableRows, GetTableByScope, Package, Accountext, names } from "../types";
 import { HttpClient, Fetch } from "./HttpClient";
 
 /**
@@ -205,5 +205,20 @@ export class DappClient extends HttpClient {
             limit,
             reverse,
         });
+    }
+
+    /**
+     * [GET /v1/chain/get_info](https://developers.eos.io/eosio-nodeos/reference#get_info)
+     *
+     * Returns an object containing various details about the blockchain.
+     *
+     * @returns {Promise<GetInfo>} table rows
+     * @example
+     *
+     * const response = await rpc.get_info();
+     * console.log(response);
+     */
+    public get_info() {
+        return this.post<GetInfo>(V1_GET_INFO);
     }
 }

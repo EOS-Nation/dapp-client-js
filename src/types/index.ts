@@ -1,6 +1,7 @@
 // chain
 export { GetTableRows } from "./chain/get_table_rows";
 export { GetTableByScope } from "./chain/get_table_by_scope";
+export { GetInfo } from "./chain/get_info";
 
 // dappservices
 export * from "./dappservices";

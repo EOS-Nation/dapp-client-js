@@ -91,7 +91,7 @@ export class HttpClient {
      *
      * @private
      */
-    public async post<T>(path: string, body: any): Promise<T> {
+    public async post<T>(path: string, body = {}): Promise<T> {
         let response;
         let json;
         try {

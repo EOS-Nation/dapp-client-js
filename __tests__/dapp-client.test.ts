@@ -23,3 +23,8 @@ test("DappClient.get_table_accountext", async () => {
   const response = await client.get_table_accountext();
   expect(!!response).toBeTruthy();
 });
+
+test("DappClient.get_info", async () => {
+  const response = await client.get_info();
+  expect(!!response).toBeTruthy();
+});
