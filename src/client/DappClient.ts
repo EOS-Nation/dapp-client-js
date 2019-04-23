@@ -1,5 +1,5 @@
-import { V1_GET_TABLE_ROWS, V1_GET_TABLE_BY_SCOPE, V1_GET_INFO } from "../types/endpoints";
-import { GetInfo, GetTableRows, GetTableByScope, Package, Accountext, names } from "../types";
+import { V1_GET_TABLE_ROWS, V1_GET_TABLE_BY_SCOPE, V1_GET_INFO, V1_GET_CURRENCY_STATS } from "../types/endpoints";
+import { GetInfo, GetTableRows, GetTableByScope, Package, Accountext, GetCurrencyStats, names } from "../types";
 import { HttpClient, Fetch } from "./HttpClient";
 
 /**
@@ -204,6 +204,26 @@ export class DappClient extends HttpClient {
             upper_bound,
             limit,
             reverse,
+        });
+    }
+
+    /**
+     * [GET /v1/chain/get_currency_stats](https://developers.eos.io/eosio-nodeos/reference#get_currency_stats)
+     *
+     * Retrieve the stats of for a given currency
+     *
+     * @param {string} code The contract that operates the currency
+     * @param {string} symbol The symbol for the currency if the contract operates multiple currencies
+     * @returns {Promise<GetCurrencyStats>} table rows
+     * @example
+     *
+     * const response = await rpc.get_currency_stats("eosio.token", "EOS");
+     * console.log(response);
+     */
+    public get_currency_stats(code: string, symbol: string) {
+        return this.post<GetCurrencyStats>(V1_GET_CURRENCY_STATS, {
+            code,
+            symbol,
         });
     }
 

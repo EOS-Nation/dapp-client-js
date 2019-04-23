@@ -48,6 +48,7 @@ const client = new DappClient(endpoint, { fetch })
 # Chain
 /v1/chain/get_table_rows
 /v1/chain/get_table_by_scope
+/v1/chain/get_currency_stats
 ```
 
 ## API
@@ -422,6 +423,6 @@ xsignal
 -   `service` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
 -   `action` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
 -   `provider` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `pkg`  
+-   `pkg`
 -   `signalRawData` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** std::vector<char>
 -   `package` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
