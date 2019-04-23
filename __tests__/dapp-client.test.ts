@@ -28,3 +28,8 @@ test("DappClient.get_info", async () => {
   const response = await client.get_info();
   expect(!!response).toBeTruthy();
 });
+
+test("DappClient.get_currency_stats", async () => {
+  const response = await client.get_currency_stats("eosio.token", "eos");
+  expect(!!response).toBeTruthy();
+});
