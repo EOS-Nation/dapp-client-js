@@ -1,7 +1,12 @@
 /**
- * claimrewards
+ * ACTION
+ *
+ * `dappservices::claimrewards`
  *
  * @param {string} provider name
+ * @example
+ *
+ * claimrewards("<DSP Provider>");
  */
 export function claimrewards(provider: string) {
     return {
@@ -10,10 +15,16 @@ export function claimrewards(provider: string) {
 }
 
 /**
- * close
+ * ACTION
  *
+ * `dappservices::close`
+ *
+ * @private
  * @param {string} owner name
  * @param {string} symbol symbol_code
+ * @example
+ *
+ * close("dappservices", "DAPP")
  */
 export function close(owner: string, symbol: string) {
     return {
@@ -23,11 +34,16 @@ export function close(owner: string, symbol: string) {
 }
 
 /**
- * closeprv
+ * ACTION
+ *
+ * `dappservices::closeprv`
  *
  * @param {string} owner name
  * @param {string} service name
  * @param {string} provider name
+ * @example
+ *
+ * closeprv("<Account>", "ipfsservice1", "<DSP Provider>")
  */
 export function closeprv(owner: string, service: string, provider: string) {
     return {
@@ -38,11 +54,17 @@ export function closeprv(owner: string, service: string, provider: string) {
 }
 
 /**
- * create
+ * ACTION
  *
+ * `dappservices::create`
+ *
+ * @private
  * @param {string} maximum_supply_amount uint64_t
  * @param {number} inflation_per_block double
  * @param {string} inflation_starts_at uint64_t
+ * @example
+ *
+ * create("20000000000.0000 DAPP", 0.00000000042394888, 1551196800000)
  */
 export function create(maximum_supply_amount: string, inflation_per_block: number, inflation_starts_at: string) {
     return {
@@ -53,13 +75,17 @@ export function create(maximum_supply_amount: string, inflation_per_block: numbe
 }
 
 /**
+ * ACTION
+ *
+ * `dappservices::disablepkg`
+ *
  * @private
- *
- * disablepkg
- *
  * @param {string} service name
  * @param {string} provider name
  * @param {string} package_id name
+ * @example
+ *
+ * disablepkg("ipfsservice1", "<DSP Provider>", "package1")
  */
 export function disablepkg(service: string, provider: string, package_id: string) {
     return {
@@ -70,13 +96,17 @@ export function disablepkg(service: string, provider: string, package_id: string
 }
 
 /**
+ * ACTION
+ *
+ * `dappservices::enablepkg`
+ *
  * @private
- *
- * enablepkg
- *
  * @param {string} service name
  * @param {string} provider name
  * @param {string} package_id name
+ * @example
+ *
+ * enablepkg("ipfsservice1", "<DSP Provider>", "package1")
  */
 export function enablepkg(service: string, provider: string, package_id: string) {
     return {
@@ -87,11 +117,17 @@ export function enablepkg(service: string, provider: string, package_id: string)
 }
 
 /**
- * issue
+ * ACTION
  *
+ * `dappservices::issue`
+ *
+ * @private
  * @param {string} to name
  * @param {string} quantity asset
  * @param {string} memo string
+ * @example
+ *
+ * issue("<Account>", "1.0000 DAPP", "init")
  */
 export function issue(to: string, quantity: string, memo: string) {
     return {
@@ -102,7 +138,9 @@ export function issue(to: string, quantity: string, memo: string) {
 }
 
 /**
- * modifypkg
+ * ACTION
+ *
+ * `dappservices::modifypkg`
  *
  * @param {string} provider name
  * @param {string} package_id name
@@ -121,11 +159,17 @@ export function modifypkg(provider: string, package_id: string, service: string,
 }
 
 /**
- * open
+ * ACTION
  *
+ * `dappservices::open`
+ *
+ * @private
  * @param {string} owner name
  * @param {string} symbol symbol_code
  * @param {string} ram_payer name
+ * @example
+ *
+ * open("dappservices", "DAPP", "dappservices")
  */
 export function open(owner: string, symbol: string, ram_payer: string) {
     return {
@@ -136,12 +180,17 @@ export function open(owner: string, symbol: string, ram_payer: string) {
 }
 
 /**
- * refund
+ * ACTION
+ *
+ * `dappservices::refund`
  *
  * @param {string} to name
  * @param {string} provider name
  * @param {string} service name
  * @param {string} symcode symbol_code
+ * @example
+ *
+ * refund("<Account>", "<DSP Provider>", "ipfsserver1", "DAPP")
  */
 export function refund(to: string, provider: string, service: string, symcode: string) {
     return {
@@ -153,7 +202,9 @@ export function refund(to: string, provider: string, service: string, symcode: s
 }
 
 /**
- * regpkg
+ * ACTION
+ *
+ * `dappservices::regpkg`
  *
  * @param {string} newpackage package
  */
@@ -164,8 +215,11 @@ export function regpkg(newpackage: string) {
 }
 
 /**
- * retire
+ * ACTION
  *
+ * `dappservices::retire`
+ *
+ * @private
  * @param {string} quantity asset
  * @param {string} memo string
  */
@@ -177,7 +231,9 @@ export function retire(quantity: string, memo: string) {
 }
 
 /**
- * selectpkg
+ * ACTION
+ *
+ * `dappservices::selectpkg`
  *
  * @param {string} owner name
  * @param {string} provider name
@@ -194,7 +250,9 @@ export function selectpkg(owner: string, provider: string, service: string, pkg:
 }
 
 /**
- * stake
+ * ACTION
+ *
+ * `dappservices::stake`
  *
  * @param {string} from name
  * @param {string} provider name
@@ -211,7 +269,9 @@ export function stake(from: string, provider: string, service: string, quantity:
 }
 
 /**
- * transfer
+ * ACTION
+ *
+ * `dappservices::transfer`
  *
  * @param {string} from name
  * @param {string} to name
@@ -228,7 +288,9 @@ export function transfer(from: string, to: string, quantity: string, memo: strin
 }
 
 /**
- * unstake
+ * ACTION
+ *
+ * `dappservices::unstake`
  *
  * @param {string} to name
  * @param {string} provider name
@@ -245,9 +307,22 @@ export function unstake(to: string, provider: string, service: string, quantity:
 }
 
 /**
- * usage
+ * ACTION
  *
+ * `dappservices::usage`
+ *
+ * @private
  * @param {string} usage_report usage_t
+ * @example
+ *
+ * usage(JSON.stringify({
+ *   package: "package1",
+ *   payer: "eosndappdapp",
+ *   provider: "eosnationdsp",
+ *   quantity: "0.0001 QUOTA",
+ *   service: "ipfsservice1",
+ *   success: 0
+ * }));
  */
 export function usage(usage_report: string) {
     return {
@@ -256,8 +331,11 @@ export function usage(usage_report: string) {
 }
 
 /**
- * xsignal
+ * ACTION
  *
+ * `dappservices::xsignal`
+ *
+ * @private
  * @param {string} service name
  * @param {string} action name
  * @param {string} provider name

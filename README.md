@@ -74,38 +74,32 @@ const client = new DappClient(endpoint, { fetch })
     -   [get_table_by_scope](#get_table_by_scope)
         -   [Parameters](#parameters-4)
         -   [Examples](#examples-5)
+    -   [get_currency_stats](#get_currency_stats)
+        -   [Parameters](#parameters-5)
+        -   [Examples](#examples-6)
+    -   [get_info](#get_info)
+        -   [Examples](#examples-7)
 -   [claimrewards](#claimrewards)
-    -   [Parameters](#parameters-5)
--   [close](#close)
     -   [Parameters](#parameters-6)
+    -   [Examples](#examples-8)
 -   [closeprv](#closeprv)
     -   [Parameters](#parameters-7)
--   [create](#create)
-    -   [Parameters](#parameters-8)
--   [issue](#issue)
-    -   [Parameters](#parameters-9)
+    -   [Examples](#examples-9)
 -   [modifypkg](#modifypkg)
-    -   [Parameters](#parameters-10)
--   [open](#open)
-    -   [Parameters](#parameters-11)
+    -   [Parameters](#parameters-8)
 -   [refund](#refund)
-    -   [Parameters](#parameters-12)
+    -   [Parameters](#parameters-9)
+    -   [Examples](#examples-10)
 -   [regpkg](#regpkg)
-    -   [Parameters](#parameters-13)
--   [retire](#retire)
-    -   [Parameters](#parameters-14)
+    -   [Parameters](#parameters-10)
 -   [selectpkg](#selectpkg)
-    -   [Parameters](#parameters-15)
+    -   [Parameters](#parameters-11)
 -   [stake](#stake)
-    -   [Parameters](#parameters-16)
+    -   [Parameters](#parameters-12)
 -   [transfer](#transfer)
-    -   [Parameters](#parameters-17)
+    -   [Parameters](#parameters-13)
 -   [unstake](#unstake)
-    -   [Parameters](#parameters-18)
--   [usage](#usage)
-    -   [Parameters](#parameters-19)
--   [xsignal](#xsignal)
-    -   [Parameters](#parameters-20)
+    -   [Parameters](#parameters-14)
 
 ### DAPP
 
@@ -265,26 +259,62 @@ console.log(response);
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetTableByScope>** table rows
 
+#### get_currency_stats
+
+[GET /v1/chain/get_currency_stats](https://developers.eos.io/eosio-nodeos/reference#get_currency_stats)
+
+Retrieve the stats of for a given currency
+
+##### Parameters
+
+-   `code` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The contract that operates the currency
+-   `symbol` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The symbol for the currency if the contract operates multiple currencies
+
+##### Examples
+
+```javascript
+const response = await rpc.get_currency_stats("eosio.token", "EOS");
+console.log(response);
+```
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetCurrencyStats>** table rows
+
+#### get_info
+
+[GET /v1/chain/get_info](https://developers.eos.io/eosio-nodeos/reference#get_info)
+
+Returns an object containing various details about the blockchain.
+
+##### Examples
+
+```javascript
+const response = await rpc.get_info();
+console.log(response);
+```
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetInfo>** table rows
+
 ### claimrewards
 
-claimrewards
+ACTION
+
+`dappservices::claimrewards`
 
 #### Parameters
 
 -   `provider` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
 
-### close
+#### Examples
 
-close
-
-#### Parameters
-
--   `owner` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `symbol` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** symbol_code
+```javascript
+claimrewards("<DSP Provider>");
+```
 
 ### closeprv
 
-closeprv
+ACTION
+
+`dappservices::closeprv`
 
 #### Parameters
 
@@ -292,29 +322,17 @@ closeprv
 -   `service` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
 -   `provider` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
 
-### create
+#### Examples
 
-create
-
-#### Parameters
-
--   `maximum_supply_amount` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** uint64_t
--   `inflation_per_block` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** double
--   `inflation_starts_at` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** uint64_t
-
-### issue
-
-issue
-
-#### Parameters
-
--   `to` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `quantity` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** asset
--   `memo` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** string
+```javascript
+closeprv("<Account>", "ipfsservice1", "<DSP Provider>")
+```
 
 ### modifypkg
 
-modifypkg
+ACTION
+
+`dappservices::modifypkg`
 
 #### Parameters
 
@@ -324,19 +342,11 @@ modifypkg
 -   `api_endpoint` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** std::string
 -   `package_json_uri` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** std::string
 
-### open
-
-open
-
-#### Parameters
-
--   `owner` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `symbol` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** symbol_code
--   `ram_payer` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
-
 ### refund
 
-refund
+ACTION
+
+`dappservices::refund`
 
 #### Parameters
 
@@ -345,26 +355,27 @@ refund
 -   `service` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
 -   `symcode` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** symbol_code
 
+#### Examples
+
+```javascript
+refund("<Account>", "<DSP Provider>", "ipfsserver1", "DAPP")
+```
+
 ### regpkg
 
-regpkg
+ACTION
+
+`dappservices::regpkg`
 
 #### Parameters
 
 -   `newpackage` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** package
 
-### retire
-
-retire
-
-#### Parameters
-
--   `quantity` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** asset
--   `memo` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** string
-
 ### selectpkg
 
-selectpkg
+ACTION
+
+`dappservices::selectpkg`
 
 #### Parameters
 
@@ -375,7 +386,9 @@ selectpkg
 
 ### stake
 
-stake
+ACTION
+
+`dappservices::stake`
 
 #### Parameters
 
@@ -386,7 +399,9 @@ stake
 
 ### transfer
 
-transfer
+ACTION
+
+`dappservices::transfer`
 
 #### Parameters
 
@@ -397,7 +412,9 @@ transfer
 
 ### unstake
 
-unstake
+ACTION
+
+`dappservices::unstake`
 
 #### Parameters
 
@@ -405,24 +422,3 @@ unstake
 -   `provider` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
 -   `service` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
 -   `quantity` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** asset
-
-### usage
-
-usage
-
-#### Parameters
-
--   `usage_report` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** usage_t
-
-### xsignal
-
-xsignal
-
-#### Parameters
-
--   `service` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `action` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `provider` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `pkg`
--   `signalRawData` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** std::vector<char>
--   `package` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name

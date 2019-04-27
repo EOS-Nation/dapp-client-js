@@ -20,12 +20,11 @@
   "homepage": "https://github.com/EOS-Nation/dapp-network-js",
   "license": "MIT",
   "devDependencies": {
-    "@types/debug": "^4.1.4",
+    "@types/debug": "*",
     "@types/isomorphic-fetch": "*",
     "@types/jest": "*",
     "@types/node": "*",
     "documentation": "*",
-    "eosjs": "^20.0.0",
     "isomorphic-fetch": "*",
     "jest": "*",
     "ts-jest": "*",
@@ -34,7 +33,7 @@
     "typescript": "*"
   },
   "dependencies": {
-    "debug": "^4.1.1"
+    "debug": "*"
   },
   "directories": {
     "example": "examples"
