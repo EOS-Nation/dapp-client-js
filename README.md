@@ -14,12 +14,6 @@ or using NPM:
 npm install --save dapp-client
 ```
 
-or using latest:
-
-```bash
-npm install --save git+ssh://git@github.com:EOS-Nation/dapp-client-js.git
-```
-
 ## Quick Start
 
 **CommonJS**
