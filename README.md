@@ -40,9 +40,10 @@ const client = new DappClient(endpoint, { fetch })
 
 ```bash
 # Chain
-/v1/chain/get_table_rows
-/v1/chain/get_table_by_scope
 /v1/chain/get_currency_stats
+/v1/chain/get_info
+/v1/chain/get_table_by_scope
+/v1/chain/get_table_rows
 ```
 
 ## API
