@@ -3,6 +3,7 @@ export { GetTableRows } from "./chain/get_table_rows";
 export { GetTableByScope } from "./chain/get_table_by_scope";
 export { GetInfo } from "./chain/get_info";
 export { GetCurrencyStats } from "./chain/get_currency_stats";
+export { GetCurrencyBalance } from "./chain/get_currency_balance";
 
 // dappservices
 export * from "./dappservices";

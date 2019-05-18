@@ -1,5 +1,20 @@
-import { V1_GET_TABLE_ROWS, V1_GET_TABLE_BY_SCOPE, V1_GET_INFO, V1_GET_CURRENCY_STATS } from "../types/endpoints";
-import { GetInfo, GetTableRows, GetTableByScope, Package, Accountext, GetCurrencyStats, names } from "../types";
+import {
+    V1_GET_TABLE_ROWS,
+    V1_GET_TABLE_BY_SCOPE,
+    V1_GET_INFO,
+    V1_GET_CURRENCY_STATS,
+    V1_GET_CURRENCY_BALANCE,
+} from "../types/endpoints";
+import {
+    GetInfo,
+    GetTableRows,
+    GetTableByScope,
+    Package,
+    Accountext,
+    GetCurrencyStats,
+    GetCurrencyBalance,
+    names,
+} from "../types";
 import { HttpClient, Fetch } from "./HttpClient";
 
 /**
@@ -204,6 +219,28 @@ export class DappClient extends HttpClient {
             upper_bound,
             limit,
             reverse,
+        });
+    }
+
+    /**
+     * [GET /v1/chain/get_currency_balance](https://developers.eos.io/eosio-nodeos/reference#get_currency_balance)
+     *
+     * Retrieve the stats of for a given currency
+     *
+     * @param {string} code The contract that operates the currency
+     * @param {string} account The account to query balances for
+     * @param {string} symbol The symbol for the currency if the contract operates multiple currencies
+     * @returns {Promise<GetCurrencyBalance>} table rows
+     * @example
+     *
+     * const response = await rpc.get_currency_balance("eosio.token", "eosio.null", "EOS");
+     * console.log(response);
+     */
+    public get_currency_balance(code: string, account: string, symbol: string) {
+        return this.post<GetCurrencyBalance>(V1_GET_CURRENCY_BALANCE, {
+            code,
+            account,
+            symbol,
         });
     }
 

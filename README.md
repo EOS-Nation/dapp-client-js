@@ -69,32 +69,35 @@ const client = new DappClient(endpoint, { fetch })
     -   [get_table_by_scope](#get_table_by_scope)
         -   [Parameters](#parameters-4)
         -   [Examples](#examples-5)
-    -   [get_currency_stats](#get_currency_stats)
+    -   [get_currency_balance](#get_currency_balance)
         -   [Parameters](#parameters-5)
         -   [Examples](#examples-6)
-    -   [get_info](#get_info)
+    -   [get_currency_stats](#get_currency_stats)
+        -   [Parameters](#parameters-6)
         -   [Examples](#examples-7)
+    -   [get_info](#get_info)
+        -   [Examples](#examples-8)
 -   [claimrewards](#claimrewards)
-    -   [Parameters](#parameters-6)
-    -   [Examples](#examples-8)
--   [closeprv](#closeprv)
     -   [Parameters](#parameters-7)
     -   [Examples](#examples-9)
--   [modifypkg](#modifypkg)
+-   [closeprv](#closeprv)
     -   [Parameters](#parameters-8)
--   [refund](#refund)
-    -   [Parameters](#parameters-9)
     -   [Examples](#examples-10)
--   [regpkg](#regpkg)
+-   [modifypkg](#modifypkg)
+    -   [Parameters](#parameters-9)
+-   [refund](#refund)
     -   [Parameters](#parameters-10)
--   [selectpkg](#selectpkg)
+    -   [Examples](#examples-11)
+-   [regpkg](#regpkg)
     -   [Parameters](#parameters-11)
--   [stake](#stake)
+-   [selectpkg](#selectpkg)
     -   [Parameters](#parameters-12)
--   [transfer](#transfer)
+-   [stake](#stake)
     -   [Parameters](#parameters-13)
--   [unstake](#unstake)
+-   [transfer](#transfer)
     -   [Parameters](#parameters-14)
+-   [unstake](#unstake)
+    -   [Parameters](#parameters-15)
 
 ### DAPP
 
@@ -253,6 +256,27 @@ console.log(response);
 ```
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetTableByScope>** table rows
+
+#### get_currency_balance
+
+[GET /v1/chain/get_currency_balance](https://developers.eos.io/eosio-nodeos/reference#get_currency_balance)
+
+Retrieve the stats of for a given currency
+
+##### Parameters
+
+-   `code` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The contract that operates the currency
+-   `account` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The account to query balances for
+-   `symbol` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The symbol for the currency if the contract operates multiple currencies
+
+##### Examples
+
+```javascript
+const response = await rpc.get_currency_balance("eosio.token", "eosio.null", "EOS");
+console.log(response);
+```
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetCurrencyBalance>** table rows
 
 #### get_currency_stats
 
