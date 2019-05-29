@@ -44,6 +44,9 @@ const client = new DappClient(endpoint, { fetch })
 /v1/chain/get_info
 /v1/chain/get_table_by_scope
 /v1/chain/get_table_rows
+
+# DSP
+/v1/dsp/ipfsservice1/get_table_row
 ```
 
 ## API
@@ -66,38 +69,41 @@ const client = new DappClient(endpoint, { fetch })
     -   [get_table_rows](#get_table_rows)
         -   [Parameters](#parameters-3)
         -   [Examples](#examples-4)
-    -   [get_table_by_scope](#get_table_by_scope)
+    -   [dsp_get_table_row](#dsp_get_table_row)
         -   [Parameters](#parameters-4)
         -   [Examples](#examples-5)
-    -   [get_currency_balance](#get_currency_balance)
+    -   [get_table_by_scope](#get_table_by_scope)
         -   [Parameters](#parameters-5)
         -   [Examples](#examples-6)
-    -   [get_currency_stats](#get_currency_stats)
+    -   [get_currency_balance](#get_currency_balance)
         -   [Parameters](#parameters-6)
         -   [Examples](#examples-7)
-    -   [get_info](#get_info)
+    -   [get_currency_stats](#get_currency_stats)
+        -   [Parameters](#parameters-7)
         -   [Examples](#examples-8)
+    -   [get_info](#get_info)
+        -   [Examples](#examples-9)
 -   [claimrewards](#claimrewards)
-    -   [Parameters](#parameters-7)
-    -   [Examples](#examples-9)
--   [closeprv](#closeprv)
     -   [Parameters](#parameters-8)
     -   [Examples](#examples-10)
--   [modifypkg](#modifypkg)
+-   [closeprv](#closeprv)
     -   [Parameters](#parameters-9)
--   [refund](#refund)
-    -   [Parameters](#parameters-10)
     -   [Examples](#examples-11)
--   [regpkg](#regpkg)
+-   [modifypkg](#modifypkg)
+    -   [Parameters](#parameters-10)
+-   [refund](#refund)
     -   [Parameters](#parameters-11)
--   [selectpkg](#selectpkg)
+    -   [Examples](#examples-12)
+-   [regpkg](#regpkg)
     -   [Parameters](#parameters-12)
--   [stake](#stake)
+-   [selectpkg](#selectpkg)
     -   [Parameters](#parameters-13)
--   [transfer](#transfer)
+-   [stake](#stake)
     -   [Parameters](#parameters-14)
--   [unstake](#unstake)
+-   [transfer](#transfer)
     -   [Parameters](#parameters-15)
+-   [unstake](#unstake)
+    -   [Parameters](#parameters-16)
 
 ### DAPP
 
@@ -227,6 +233,38 @@ Returns an object containing rows from the specified table.
 
 ```javascript
 const response = await rpc.get_table_rows("<code>", "<scope>", "<table>");
+console.log(response);
+```
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetTableRows>** table rows
+
+#### dsp_get_table_row
+
+[GET /v1/dsp/ipfsservice1/get_table_row](https://docs.liquidapps.io)
+
+Returns an object containing row from the specified table.
+
+##### Parameters
+
+-   `contract` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The name of the smart contract that controls the provided table
+-   `scope` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The account to which this data belongs
+-   `table` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The name of the table to query
+-   `key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The key value to query
+-   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** optional params (optional, default `{}`)
+    -   `options.lower_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is not less than provided value in set
+    -   `options.upper_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is greater than provided value in set
+    -   `options.limit` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Limit the result amount (optional, default `10`)
+    -   `options.show_payer` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Show Payer (optional, default `false`)
+    -   `options.json` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** JSON response (optional, default `true`)
+    -   `options.index_position` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Position of the index used (optional, default `1`)
+    -   `options.key_type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Type of key specified by index_position (for example - uint64_t or name)
+    -   `options.table_key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Table Key
+    -   `options.encode_type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Encode type
+
+##### Examples
+
+```javascript
+const response = await rpc.dsp_get_table_row("<contract>", "<scope>", "<table>", "<key>");
 console.log(response);
 ```
 

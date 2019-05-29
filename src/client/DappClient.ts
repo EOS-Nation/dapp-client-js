@@ -1,12 +1,7 @@
-import {
-    V1_GET_TABLE_ROWS,
-    V1_GET_TABLE_BY_SCOPE,
-    V1_GET_INFO,
-    V1_GET_CURRENCY_STATS,
-    V1_GET_CURRENCY_BALANCE,
-} from "../types/endpoints";
+import * as endpoints from "../types/endpoints";
 import {
     GetInfo,
+    GetTableRow,
     GetTableRows,
     GetTableByScope,
     Package,
@@ -124,8 +119,8 @@ export class DappClient extends HttpClient {
      * Returns an object containing rows from the specified table.
      *
      * @param {string} code The name of the smart contract that controls the provided table
-     * @param {string} table The name of the table to query
      * @param {string} scope The account to which this data belongs
+     * @param {string} table The name of the table to query
      * @param {object} [options={}] optional params
      * @param {string} [options.lower_bound] Filters results to return the first element that is not less than provided value in set
      * @param {string} [options.upper_bound] Filters results to return the first element that is greater than provided value in set
@@ -164,10 +159,74 @@ export class DappClient extends HttpClient {
         const encode_type = options.encode_type || "";
         const show_payer = options.show_payer === true ? true : false;
 
-        return this.post<GetTableRows<T>>(V1_GET_TABLE_ROWS, {
+        return this.post<GetTableRows<T>>(endpoints.V1_GET_TABLE_ROWS, {
             code,
             table,
             scope,
+            json,
+            index_position,
+            key_type,
+            table_key,
+            lower_bound,
+            upper_bound,
+            encode_type,
+            show_payer,
+            limit,
+        });
+    }
+
+    /**
+     * [GET /v1/dsp/ipfsservice1/get_table_row](https://docs.liquidapps.io)
+     *
+     * Returns an object containing row from the specified table.
+     *
+     * @param {string} contract The name of the smart contract that controls the provided table
+     * @param {string} scope The account to which this data belongs
+     * @param {string} table The name of the table to query
+     * @param {string} key The key value to query
+     * @param {object} [options={}] optional params
+     * @param {string} [options.lower_bound] Filters results to return the first element that is not less than provided value in set
+     * @param {string} [options.upper_bound] Filters results to return the first element that is greater than provided value in set
+     * @param {number} [options.limit=10] Limit the result amount
+     * @param {boolean} [options.show_payer=false] Show Payer
+     * @param {boolean} [options.json=true] JSON response
+     * @param {number} [options.index_position=1] Position of the index used
+     * @param {string} [options.key_type] Type of key specified by index_position (for example - uint64_t or name)
+     * @param {string} [options.table_key] Table Key
+     * @param {string} [options.encode_type] Encode type
+     * @returns {Promise<GetTableRows>} table rows
+     * @example
+     *
+     * const response = await rpc.dsp_get_table_row("<contract>", "<scope>", "<table>", "<key>");
+     * console.log(response);
+     */
+    public dsp_get_table_row<T = unknown>(contract: string, scope: string, table: string, key: string, options: {
+        index_position?: number,
+        json?: boolean,
+        key_type?: string,
+        lower_bound?: string,
+        upper_bound?: string,
+        table_key?: string,
+        encode_type?: string,
+        show_payer?: boolean,
+        limit?: number,
+    } = {}) {
+        // Optional params
+        const json = options.json === false ? false : true;
+        const index_position = options.index_position || 1;
+        const limit = options.limit || 10;
+        const key_type = options.key_type || "";
+        const table_key = options.table_key || "";
+        const lower_bound = options.lower_bound || "";
+        const upper_bound = options.upper_bound || "";
+        const encode_type = options.encode_type || "";
+        const show_payer = options.show_payer === true ? true : false;
+
+        return this.post<GetTableRow<T>>(endpoints.V1_DSP_GET_TABLE_ROW, {
+            contract,
+            table,
+            scope,
+            key,
             json,
             index_position,
             key_type,
@@ -212,7 +271,7 @@ export class DappClient extends HttpClient {
         const table = options.table || "";
         const reverse = options.reverse === true ? true : false;
 
-        return this.post<GetTableByScope>(V1_GET_TABLE_BY_SCOPE, {
+        return this.post<GetTableByScope>(endpoints.V1_GET_TABLE_BY_SCOPE, {
             code,
             table,
             lower_bound,
@@ -237,7 +296,7 @@ export class DappClient extends HttpClient {
      * console.log(response);
      */
     public get_currency_balance(code: string, account: string, symbol: string) {
-        return this.post<GetCurrencyBalance>(V1_GET_CURRENCY_BALANCE, {
+        return this.post<GetCurrencyBalance>(endpoints.V1_GET_CURRENCY_BALANCE, {
             code,
             account,
             symbol,
@@ -258,7 +317,7 @@ export class DappClient extends HttpClient {
      * console.log(response);
      */
     public get_currency_stats(code: string, symbol: string) {
-        return this.post<GetCurrencyStats>(V1_GET_CURRENCY_STATS, {
+        return this.post<GetCurrencyStats>(endpoints.V1_GET_CURRENCY_STATS, {
             code,
             symbol,
         });
@@ -276,6 +335,6 @@ export class DappClient extends HttpClient {
      * console.log(response);
      */
     public get_info() {
-        return this.post<GetInfo>(V1_GET_INFO);
+        return this.post<GetInfo>(endpoints.V1_GET_INFO);
     }
 }

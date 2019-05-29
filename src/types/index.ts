@@ -1,5 +1,6 @@
 // chain
 export { GetTableRows } from "./chain/get_table_rows";
+export { GetTableRow } from "./chain/get_table_row";
 export { GetTableByScope } from "./chain/get_table_by_scope";
 export { GetInfo } from "./chain/get_info";
 export { GetCurrencyStats } from "./chain/get_currency_stats";
