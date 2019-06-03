@@ -26,3 +26,11 @@ export interface Package {
   min_unstake_period: number;
   enabled: number;
 }
+
+export interface Staking {
+  id: number;
+  account: string;
+  balance: string;
+  service: string;
+  provider: string;
+}
