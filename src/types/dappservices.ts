@@ -34,3 +34,12 @@ export interface Staking {
   service: string;
   provider: string;
 }
+
+export interface Refunds {
+  id: number;
+  account: string;
+  amount: string;
+  unstake_time: number;
+  service: string;
+  provider: string;
+}
