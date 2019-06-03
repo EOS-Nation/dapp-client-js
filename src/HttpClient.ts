@@ -1,12 +1,9 @@
-import { RpcError, RpcStatusError } from "../types/error";
-import { HttpQueryParameters } from "../types/http-client";
-import debugFactory from "debug";
+import { RpcError, RpcStatusError } from "./types/error";
+import { HttpQueryParameters } from "./types/http-client";
 
 function inferFetch(fetch?: Fetch): Fetch {
-  const debug = debugFactory("dapp:http");
 
   if (fetch !== undefined) {
-    debug("Using user provided `fetch` option.");
     return fetch;
   }
 
@@ -23,13 +20,11 @@ function inferFetch(fetch?: Fetch): Fetch {
 
   // If we are in a Browser environment and `fetch` is available, use it
   if (typeof window !== "undefined" && window.fetch != null) {
-    debug("Using `fetch` global value found on 'window' variable (Browser environment).");
     return window.fetch.bind(window);
   }
 
   // If we are in a Node.js like environment and `fetch` is available, use it
   if (typeof global !== "undefined" && (global as any).fetch != null) {
-    debug("Using `fetch` global value found on 'global' variable (Node.js environment).");
     return (global as any).fetch.bind(global);
   }
 

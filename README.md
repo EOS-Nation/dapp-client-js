@@ -55,67 +55,40 @@ const client = new DappClient(endpoint, { fetch })
 
 #### Table of Contents
 
--   [DAPP](#dapp)
-    -   [Examples](#examples)
 -   [DappClient](#dappclient)
     -   [Parameters](#parameters)
-    -   [Examples](#examples-1)
+    -   [Examples](#examples)
     -   [get_table_package](#get_table_package)
         -   [Parameters](#parameters-1)
-        -   [Examples](#examples-2)
+        -   [Examples](#examples-1)
     -   [get_table_accountext](#get_table_accountext)
         -   [Parameters](#parameters-2)
-        -   [Examples](#examples-3)
+        -   [Examples](#examples-2)
     -   [get_table_rows](#get_table_rows)
         -   [Parameters](#parameters-3)
+        -   [Examples](#examples-3)
+    -   [get_all_table_rows](#get_all_table_rows)
+        -   [Parameters](#parameters-4)
         -   [Examples](#examples-4)
     -   [dsp_get_table_row](#dsp_get_table_row)
-        -   [Parameters](#parameters-4)
+        -   [Parameters](#parameters-5)
         -   [Examples](#examples-5)
     -   [get_table_by_scope](#get_table_by_scope)
-        -   [Parameters](#parameters-5)
+        -   [Parameters](#parameters-6)
         -   [Examples](#examples-6)
     -   [get_currency_balance](#get_currency_balance)
-        -   [Parameters](#parameters-6)
+        -   [Parameters](#parameters-7)
         -   [Examples](#examples-7)
     -   [get_currency_stats](#get_currency_stats)
-        -   [Parameters](#parameters-7)
+        -   [Parameters](#parameters-8)
         -   [Examples](#examples-8)
     -   [get_info](#get_info)
         -   [Examples](#examples-9)
--   [claimrewards](#claimrewards)
-    -   [Parameters](#parameters-8)
+-   [DAPP](#dapp)
     -   [Examples](#examples-10)
--   [closeprv](#closeprv)
+-   [delay](#delay)
     -   [Parameters](#parameters-9)
     -   [Examples](#examples-11)
--   [modifypkg](#modifypkg)
-    -   [Parameters](#parameters-10)
--   [refund](#refund)
-    -   [Parameters](#parameters-11)
-    -   [Examples](#examples-12)
--   [regpkg](#regpkg)
-    -   [Parameters](#parameters-12)
--   [selectpkg](#selectpkg)
-    -   [Parameters](#parameters-13)
--   [stake](#stake)
-    -   [Parameters](#parameters-14)
--   [transfer](#transfer)
-    -   [Parameters](#parameters-15)
--   [unstake](#unstake)
-    -   [Parameters](#parameters-16)
-
-### DAPP
-
-DAPP
-
-#### Examples
-
-```javascript
-import { names } from "dapp-client"
-
-names.DAPP // => "......2ke1.o4"
-```
 
 ### DappClient
 
@@ -125,8 +98,10 @@ DAPP Client
 
 -   `endpoint` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** dsp endpoint
 -   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** optional params (optional, default `{}`)
-    -   `options.dappservices` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** dappservices code (optional, default `"dappservices"`)
-    -   `options.ipfsservice1` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** ipfsservice1 code (optional, default `"ipfsservice1"`)
+    -   `options.dappservices` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** DAPP Services contract (optional, default `"dappservices"`)
+    -   `options.ipfsservice1` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** IPFS Services contract (optional, default `"ipfsservice1"`)
+    -   `options.oracleservic` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Oracle Services contract (optional, default `"oracleservic"`)
+    -   `options.cronservices` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Cron Services contract (optional, default `"cronservices"`)
     -   `options.fetch` **[Fetch](https://developer.mozilla.org/docs/Web/API/Fetch_API)** fetch (optional, default `global.fetch`)
 
 #### Examples
@@ -233,6 +208,39 @@ Returns an object containing rows from the specified table.
 
 ```javascript
 const response = await rpc.get_table_rows("<code>", "<scope>", "<table>");
+console.log(response);
+```
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetTableRows>** table rows
+
+#### get_all_table_rows
+
+[GET /v1/chain/get_table_rows](https://developers.eos.io/eosio-nodeos/reference#get_table_rows)
+
+Returns all objects containing rows from the specified table.
+
+##### Parameters
+
+-   `code` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The name of the smart contract that controls the provided table
+-   `scope` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The account to which this data belongs
+-   `table` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The name of the table to query
+-   `lower_bound_key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Key value to identify `lower_bound` object
+-   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** optional params (optional, default `{}`)
+    -   `options.lower_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is not less than provided value in set
+    -   `options.upper_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is greater than provided value in set
+    -   `options.limit` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Limit the result amount per `get_table_rows` API request (optional, default `1500`)
+    -   `options.show_payer` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Show Payer (optional, default `false`)
+    -   `options.json` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** JSON response (optional, default `true`)
+    -   `options.index_position` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Position of the index used (optional, default `1`)
+    -   `options.key_type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Type of key specified by index_position (for example - uint64_t or name)
+    -   `options.table_key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Table Key
+    -   `options.encode_type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Encode type
+    -   `options.delay_ms` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?** Delay in ms between API calls (helps prevents rate limited APIs)
+
+##### Examples
+
+```javascript
+const response = await rpc.get_all_table_rows("<code>", "<scope>", "<table>", "<lower_bound_key>");
 console.log(response);
 ```
 
@@ -351,131 +359,30 @@ console.log(response);
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetInfo>** table rows
 
-### claimrewards
+### DAPP
 
-ACTION
-
-`dappservices::claimrewards`
-
-#### Parameters
-
--   `provider` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
+DAPP
 
 #### Examples
 
 ```javascript
-claimrewards("<DSP Provider>");
+import { names } from "dapp-client"
+
+names.DAPP // => "......2ke1.o4"
 ```
 
-### closeprv
+### delay
 
-ACTION
-
-`dappservices::closeprv`
+Promise based timeout delay
 
 #### Parameters
 
--   `owner` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `service` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `provider` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
+-   `ms` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Milisecond delay
 
 #### Examples
 
 ```javascript
-closeprv("<Account>", "ipfsservice1", "<DSP Provider>")
+await delay(100);
 ```
 
-### modifypkg
-
-ACTION
-
-`dappservices::modifypkg`
-
-#### Parameters
-
--   `provider` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `package_id` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `service` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `api_endpoint` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** std::string
--   `package_json_uri` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** std::string
-
-### refund
-
-ACTION
-
-`dappservices::refund`
-
-#### Parameters
-
--   `to` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `provider` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `service` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `symcode` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** symbol_code
-
-#### Examples
-
-```javascript
-refund("<Account>", "<DSP Provider>", "ipfsserver1", "DAPP")
-```
-
-### regpkg
-
-ACTION
-
-`dappservices::regpkg`
-
-#### Parameters
-
--   `newpackage` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** package
-
-### selectpkg
-
-ACTION
-
-`dappservices::selectpkg`
-
-#### Parameters
-
--   `owner` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `provider` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `service` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `pkg` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
-
-### stake
-
-ACTION
-
-`dappservices::stake`
-
-#### Parameters
-
--   `from` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `provider` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `service` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `quantity` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** asset
-
-### transfer
-
-ACTION
-
-`dappservices::transfer`
-
-#### Parameters
-
--   `from` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `to` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `quantity` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** asset
--   `memo` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** string
-
-### unstake
-
-ACTION
-
-`dappservices::unstake`
-
-#### Parameters
-
--   `to` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `provider` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `service` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name
--   `quantity` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** asset
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;void>** 

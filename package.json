@@ -1,7 +1,8 @@
 {
   "name": "dapp-client",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "DAPP JavaScript/TypeScript Client Library",
+  "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -17,8 +18,14 @@
   "contributors": [
     "Denis Carriere <denis@eosnation.io>"
   ],
+  "directories": {
+    "example": "examples"
+  },
   "homepage": "https://github.com/EOS-Nation/dapp-client-js",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EOS-Nation/dapp-client-js.git"
+  },
   "devDependencies": {
     "@types/debug": "*",
     "@types/isomorphic-fetch": "*",
@@ -32,10 +39,5 @@
     "tslint": "*",
     "typescript": "*"
   },
-  "dependencies": {
-    "debug": "*"
-  },
-  "directories": {
-    "example": "examples"
-  }
+  "dependencies": {}
 }
