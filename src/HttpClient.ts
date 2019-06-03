@@ -116,10 +116,13 @@ export class HttpClient {
      *
      * @private
      */
-    public async get<T>(path: string, params: any): Promise<T> {
+    public async get<T>(path: string, params?: any): Promise<T> {
         let response;
         let json;
-        const url = this.endpoint + path + "?" + queryParams(params);
+        const url = params ?
+            this.endpoint + path + "?" + queryParams(params) :
+            this.endpoint + path;
+
         try {
             response = await this.fetch(url, {
                 method: "GET",
