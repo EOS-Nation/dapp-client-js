@@ -3,6 +3,8 @@ import { delay } from "./utils";
 import {
     Package,
     Accountext,
+    Staking,
+    Refunds
 } from "./types/dappservices";
 import {
     GetInfo,
@@ -79,6 +81,73 @@ export class DappClient extends HttpClient {
         show_payer?: boolean,
     } = {}) {
         return this.get_table_rows<Package>(this.dappservices, this.dappservices, "package", options);
+    }
+
+    /**
+     * Get TABLE staking
+     *
+     * @param string [scope] required param, account
+     * @param {object} [options={}] optional params
+     * @param {string} [options.lower_bound] Filters results to return the first element that is not less than provided value in set
+     * @param {string} [options.upper_bound] Filters results to return the first element that is greater than provided value in set
+     * @param {number} [options.limit=10] Limit the result amount
+     * @param {boolean} [options.show_payer=false] Show Payer
+     * @example
+     *
+     * const response = await client.get_table_staking('eosnationdsp', {limit: 500});
+     *
+     * for (const row of response.rows) {
+     *     console.log(row);
+     *     // {
+     *     //     id: 0,
+     *     //     account: 'eosnationdsp',
+     *     //     balance: '0.0000 DAPP',
+     *     //     provider: 'eosnationdsp',
+     *     //     service: 'ipfsservice1'
+     *     // }
+     * }
+     */
+    public get_table_staking(scope: string, options: {
+        lower_bound?: string,
+        upper_bound?: string,
+        limit?: number,
+        show_payer?: boolean,
+    } = {}) {
+        return this.get_table_rows<Staking>(this.dappservices, scope, "staking", options);
+    }
+
+    /**
+     * Get TABLE refunds
+     *
+     * @param string [scope] required param, account
+     * @param {object} [options={}] optional params
+     * @param {string} [options.lower_bound] Filters results to return the first element that is not less than provided value in set
+     * @param {string} [options.upper_bound] Filters results to return the first element that is greater than provided value in set
+     * @param {number} [options.limit=10] Limit the result amount
+     * @param {boolean} [options.show_payer=false] Show Payer
+     * @example
+     *
+     * const response = await client.get_table_refunds('eosnationdsp', {limit: 500});
+     *
+     * for (const row of response.rows) {
+     *     console.log(row);
+     *     // {
+     *     //     id: 0,
+     *     //     account: 'eosnationdsp',
+     *     //     amount: '10.0000 DAPP',
+     *     //     unstake_time: 12345678
+     *     //     provider: 'eosnationdsp',
+     *     //     service: 'ipfsservice1'
+     *     // }
+     * }
+     */
+    public get_table_refunds(scope: string, options: {
+        lower_bound?: string,
+        upper_bound?: string,
+        limit?: number,
+        show_payer?: boolean,
+    } = {}) {
+        return this.get_table_rows<Refunds>(this.dappservices, scope, "refunds", options);
     }
 
     /**
