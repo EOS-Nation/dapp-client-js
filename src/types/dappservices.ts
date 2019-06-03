@@ -5,12 +5,12 @@ export interface Accountext {
   provider: string;
   quota: string;
   balance: string;
-  last_usage: string;
-  last_reward: string;
+  last_usage: number;
+  last_reward: number;
   package: string;
   pending_package: string;
-  package_started: string;
-  package_end: string;
+  package_started: number;
+  package_end: number;
 }
 
 export interface Package {
