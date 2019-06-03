@@ -127,14 +127,15 @@ export class DappClient extends HttpClient {
      * @param {boolean} [options.show_payer=false] Show Payer
      * @example
      *
-     * const response = await client.get_table_staking('eosnationdsp', {limit: 500});
+     * const response = await client.get_table_refunds('eosnationdsp', {limit: 500});
      *
      * for (const row of response.rows) {
      *     console.log(row);
      *     // {
      *     //     id: 0,
      *     //     account: 'eosnationdsp',
-     *     //     balance: '0.0000 DAPP',
+     *     //     amount: '10.0000 DAPP',
+     *     //     unstake_time: 12345678
      *     //     provider: 'eosnationdsp',
      *     //     service: 'ipfsservice1'
      *     // }
