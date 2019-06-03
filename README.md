@@ -61,34 +61,42 @@ const client = new DappClient(endpoint, { fetch })
     -   [get_table_package](#get_table_package)
         -   [Parameters](#parameters-1)
         -   [Examples](#examples-1)
-    -   [get_table_accountext](#get_table_accountext)
+    -   [get_table_staking](#get_table_staking)
         -   [Parameters](#parameters-2)
         -   [Examples](#examples-2)
-    -   [get_table_rows](#get_table_rows)
+    -   [get_table_refunds](#get_table_refunds)
         -   [Parameters](#parameters-3)
         -   [Examples](#examples-3)
-    -   [get_all_table_rows](#get_all_table_rows)
+    -   [get_table_accountext](#get_table_accountext)
         -   [Parameters](#parameters-4)
         -   [Examples](#examples-4)
-    -   [dsp_get_table_row](#dsp_get_table_row)
+    -   [get_table_rows](#get_table_rows)
         -   [Parameters](#parameters-5)
         -   [Examples](#examples-5)
-    -   [get_table_by_scope](#get_table_by_scope)
+    -   [get_all_table_rows](#get_all_table_rows)
         -   [Parameters](#parameters-6)
         -   [Examples](#examples-6)
-    -   [get_currency_balance](#get_currency_balance)
+    -   [dsp_get_table_row](#dsp_get_table_row)
         -   [Parameters](#parameters-7)
         -   [Examples](#examples-7)
-    -   [get_currency_stats](#get_currency_stats)
+    -   [get_table_by_scope](#get_table_by_scope)
         -   [Parameters](#parameters-8)
         -   [Examples](#examples-8)
-    -   [get_info](#get_info)
+    -   [get_currency_balance](#get_currency_balance)
+        -   [Parameters](#parameters-9)
         -   [Examples](#examples-9)
+    -   [get_currency_stats](#get_currency_stats)
+        -   [Parameters](#parameters-10)
+        -   [Examples](#examples-10)
+    -   [get_info](#get_info)
+        -   [Examples](#examples-11)
 -   [DAPP](#dapp)
-    -   [Examples](#examples-10)
+    -   [Examples](#examples-12)
+-   [DAPPHDL](#dapphdl)
+    -   [Examples](#examples-13)
 -   [delay](#delay)
-    -   [Parameters](#parameters-9)
-    -   [Examples](#examples-11)
+    -   [Parameters](#parameters-11)
+    -   [Examples](#examples-14)
 
 ### DappClient
 
@@ -142,6 +150,67 @@ for (const row of response.rows) {
     //     min_stake_quantity: '10000.0000 DAPP',
     //     min_unstake_period: 3600,
     //     enabled: 1
+    // }
+}
+```
+
+#### get_table_staking
+
+Get TABLE staking
+
+##### Parameters
+
+-   `scope` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** dsp account
+-   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** optional params (optional, default `{}`)
+    -   `options.lower_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is not less than provided value in set
+    -   `options.upper_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is greater than provided value in set
+    -   `options.limit` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Limit the result amount (optional, default `10`)
+    -   `options.show_payer` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Show Payer (optional, default `false`)
+
+##### Examples
+
+```javascript
+const response = await client.get_table_staking('eosnationdsp', {limit: 500});
+
+for (const row of response.rows) {
+    console.log(row);
+    // {
+    //     id: 0,
+    //     account: 'eosnationdsp',
+    //     balance: '0.0000 DAPP',
+    //     provider: 'eosnationdsp',
+    //     service: 'ipfsservice1'
+    // }
+}
+```
+
+#### get_table_refunds
+
+Get TABLE refunds
+
+##### Parameters
+
+-   `scope` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** dsp account
+-   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** optional params (optional, default `{}`)
+    -   `options.lower_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is not less than provided value in set
+    -   `options.upper_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is greater than provided value in set
+    -   `options.limit` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Limit the result amount (optional, default `10`)
+    -   `options.show_payer` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Show Payer (optional, default `false`)
+
+##### Examples
+
+```javascript
+const response = await client.get_table_refunds('eosnationdsp', {limit: 500});
+
+for (const row of response.rows) {
+    console.log(row);
+    // {
+    //     id: 0,
+    //     account: 'eosnationdsp',
+    //     amount: '10.0000 DAPP',
+    //     unstake_time: 12345678
+    //     provider: 'eosnationdsp',
+    //     service: 'ipfsservice1'
     // }
 }
 ```
@@ -369,6 +438,18 @@ DAPP
 import { names } from "dapp-client"
 
 names.DAPP // => "......2ke1.o4"
+```
+
+### DAPPHDL
+
+DAPPHDL
+
+#### Examples
+
+```javascript
+import { names } from "dapp-client"
+
+names.DAPPHDL // => ".1a4cm2ke1.o4"
 ```
 
 ### delay

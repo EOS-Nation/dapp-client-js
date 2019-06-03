@@ -4,7 +4,7 @@ import {
     Package,
     Accountext,
     Staking,
-    Refunds
+    Refunds,
 } from "./types/dappservices";
 import {
     GetInfo,
@@ -86,7 +86,7 @@ export class DappClient extends HttpClient {
     /**
      * Get TABLE staking
      *
-     * @param string [scope] required param, account
+     * @param {string} scope dsp account
      * @param {object} [options={}] optional params
      * @param {string} [options.lower_bound] Filters results to return the first element that is not less than provided value in set
      * @param {string} [options.upper_bound] Filters results to return the first element that is greater than provided value in set
@@ -119,7 +119,7 @@ export class DappClient extends HttpClient {
     /**
      * Get TABLE refunds
      *
-     * @param string [scope] required param, account
+     * @param {string} scope dsp account
      * @param {object} [options={}] optional params
      * @param {string} [options.lower_bound] Filters results to return the first element that is not less than provided value in set
      * @param {string} [options.upper_bound] Filters results to return the first element that is greater than provided value in set
