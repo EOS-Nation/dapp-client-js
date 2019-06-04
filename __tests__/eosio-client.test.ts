@@ -1,7 +1,7 @@
 import fetch from "isomorphic-fetch";
 import { EosioClient } from "../src";
 
-const endpoint = process.env.EOSIO_ENDPOINT || "https://dsp.eosn.io";
+const endpoint = process.env.EOSIO_ENDPOINT || "https://api.eosn.io";
 const client = new EosioClient(endpoint, { fetch });
 
 test("EosioClient.get_table_rows", async () => {

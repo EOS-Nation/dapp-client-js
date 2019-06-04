@@ -199,7 +199,7 @@ export class DappClient extends EosioClient {
     /**
      * Get TABLE accounts from dappairhodl1 contract
      *
-     * @param {string} [scope] user account
+     * @param {string} scope user account
      * @param {object} [options={}] optional params
      * @param {string} [options.lower_bound] Filters results to return the first element that is not less than provided value in set
      * @param {string} [options.upper_bound] Filters results to return the first element that is greater than provided value in set
@@ -207,7 +207,7 @@ export class DappClient extends EosioClient {
      * @param {boolean} [options.show_payer=false] Show Payer
      * @example
      *
-     * const response = await client.DAPPHDL_get_table_accounts('eosnationdsp', {limit: 500});
+     * const response = await client.get_dapphdl_accounts('eosnationdsp', {limit: 500});
      *
      * for (const row of response.rows) {
      *     console.log(row);
@@ -219,7 +219,7 @@ export class DappClient extends EosioClient {
      *     // }
      * }
      */
-    public DAPPHDL_get_table_accounts(scope: string, options: {
+    public get_dapphdl_accounts(scope: string, options: {
         lower_bound?: string,
         upper_bound?: string,
         limit?: number,

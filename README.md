@@ -72,36 +72,39 @@ const client = new DappClient(endpoint, { fetch })
     -   [get_table_accountext](#get_table_accountext)
         -   [Parameters](#parameters-4)
         -   [Examples](#examples-4)
-    -   [dsp_ipfs_get_table_row](#dsp_ipfs_get_table_row)
+    -   [get_dapphdl_accounts](#get_dapphdl_accounts)
         -   [Parameters](#parameters-5)
         -   [Examples](#examples-5)
+    -   [dsp_ipfs_get_table_row](#dsp_ipfs_get_table_row)
+        -   [Parameters](#parameters-6)
+        -   [Examples](#examples-6)
 -   [DAPP](#dapp)
-    -   [Examples](#examples-6)
--   [DAPPHDL](#dapphdl)
     -   [Examples](#examples-7)
--   [EosioClient](#eosioclient)
-    -   [Parameters](#parameters-6)
+-   [DAPPHDL](#dapphdl)
     -   [Examples](#examples-8)
+-   [EosioClient](#eosioclient)
+    -   [Parameters](#parameters-7)
+    -   [Examples](#examples-9)
     -   [get_table_rows](#get_table_rows)
-        -   [Parameters](#parameters-7)
-        -   [Examples](#examples-9)
-    -   [get_all_table_rows](#get_all_table_rows)
         -   [Parameters](#parameters-8)
         -   [Examples](#examples-10)
-    -   [get_table_by_scope](#get_table_by_scope)
+    -   [get_all_table_rows](#get_all_table_rows)
         -   [Parameters](#parameters-9)
         -   [Examples](#examples-11)
-    -   [get_currency_balance](#get_currency_balance)
+    -   [get_table_by_scope](#get_table_by_scope)
         -   [Parameters](#parameters-10)
         -   [Examples](#examples-12)
-    -   [get_currency_stats](#get_currency_stats)
+    -   [get_currency_balance](#get_currency_balance)
         -   [Parameters](#parameters-11)
         -   [Examples](#examples-13)
-    -   [get_info](#get_info)
+    -   [get_currency_stats](#get_currency_stats)
+        -   [Parameters](#parameters-12)
         -   [Examples](#examples-14)
+    -   [get_info](#get_info)
+        -   [Examples](#examples-15)
 -   [delay](#delay)
-    -   [Parameters](#parameters-12)
-    -   [Examples](#examples-15)
+    -   [Parameters](#parameters-13)
+    -   [Examples](#examples-16)
 
 ### DappClient
 
@@ -254,6 +257,35 @@ for (const row of response.rows) {
     //     pending_package: 'package2',
     //     package_started: '1555466031000',
     //     package_end: '1555469631000'
+    // }
+}
+```
+
+#### get_dapphdl_accounts
+
+Get TABLE accounts from dappairhodl1 contract
+
+##### Parameters
+
+-   `scope` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user account
+-   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** optional params (optional, default `{}`)
+    -   `options.lower_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is not less than provided value in set
+    -   `options.upper_bound` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filters results to return the first element that is greater than provided value in set
+    -   `options.limit` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Limit the result amount (optional, default `10`)
+    -   `options.show_payer` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Show Payer (optional, default `false`)
+
+##### Examples
+
+```javascript
+const response = await client.get_dapphdl_accounts('eosnationdsp', {limit: 500});
+
+for (const row of response.rows) {
+    console.log(row);
+    // {
+    //     balance: '0.0000 DAPPHDL',
+    //     allocation: '0.0000 DAPPHDL',
+    //     staked: '0.0000 DAPPHDL',
+    //     claimed: false
     // }
 }
 ```
