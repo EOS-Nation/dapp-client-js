@@ -1,6 +1,6 @@
 {
   "name": "dapp-client",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "description": "DAPP JavaScript/TypeScript Client Library",
   "license": "MIT",
   "main": "dist/index.js",
@@ -17,7 +17,7 @@
   "author": "Denis Carriere <denis@eosnation.io>",
   "contributors": [
     "Denis Carriere <denis@eosnation.io>",
-    "Jan Langheimer <jan@eosindex.io>"
+    "Jan Langheimer <jan@langheimer.com>"
   ],
   "directories": {
     "example": "examples"
