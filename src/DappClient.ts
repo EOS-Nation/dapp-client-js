@@ -5,6 +5,7 @@ import {
     Staking,
     Refunds,
 } from "./types/dappservices";
+import { DapphdlAccounts } from "./types/dappairhodl1";
 import * as names from "./types/names";
 import { GetTableRow } from "./types";
 import { Fetch } from "./HttpClient";
@@ -30,6 +31,7 @@ import { EosioClient } from "./EosioClient";
  */
 export class DappClient extends EosioClient {
     public dappservices = "dappservices";
+    public dappairhodl1 = "dappairhodl1";
     public ipfsservice1 = "ipfsservice1";
     public oracleservic = "oracleservic";
     public cronservices = "cronservices";
@@ -37,12 +39,14 @@ export class DappClient extends EosioClient {
     constructor(endpoint: string, options: {
         fetch?: Fetch,
         dappservices?: string,
+        dappairhodl1?: string,
         ipfsservice1?: string,
         oracleservic?: string,
         cronservices?: string,
     } = {}) {
         super(endpoint, options);
         this.dappservices = options.dappservices || this.dappservices;
+        this.dappairhodl1 = options.dappairhodl1 || this.dappairhodl1;
         this.ipfsservice1 = options.ipfsservice1 || this.ipfsservice1;
         this.oracleservic = options.oracleservic || this.oracleservic;
         this.cronservices = options.cronservices || this.cronservices;
@@ -190,6 +194,38 @@ export class DappClient extends EosioClient {
         show_payer?: boolean,
     } = {}) {
         return this.get_table_rows<Accountext>(this.dappservices, names.DAPP, "accountext", options);
+    }
+
+    /**
+     * Get TABLE accounts from dappairhodl1 contract
+     *
+     * @param {string} [scope] user account
+     * @param {object} [options={}] optional params
+     * @param {string} [options.lower_bound] Filters results to return the first element that is not less than provided value in set
+     * @param {string} [options.upper_bound] Filters results to return the first element that is greater than provided value in set
+     * @param {number} [options.limit=10] Limit the result amount
+     * @param {boolean} [options.show_payer=false] Show Payer
+     * @example
+     *
+     * const response = await client.DAPPHDL_get_table_accounts('eosnationdsp', {limit: 500});
+     *
+     * for (const row of response.rows) {
+     *     console.log(row);
+     *     // {
+     *     //     balance: '0.0000 DAPPHDL',
+     *     //     allocation: '0.0000 DAPPHDL',
+     *     //     staked: '0.0000 DAPPHDL',
+     *     //     claimed: false
+     *     // }
+     * }
+     */
+    public DAPPHDL_get_table_accounts(scope: string, options: {
+        lower_bound?: string,
+        upper_bound?: string,
+        limit?: number,
+        show_payer?: boolean,
+    } = {}) {
+        return this.get_table_rows<DapphdlAccounts>(this.dappairhodl1, scope, "accounts", options);
     }
 
     /**
