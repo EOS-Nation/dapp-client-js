@@ -1,6 +1,6 @@
 {
   "name": "dapp-client",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "DAPP JavaScript/TypeScript Client Library",
   "license": "MIT",
   "main": "dist/index.js",
