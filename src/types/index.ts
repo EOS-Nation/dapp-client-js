@@ -9,6 +9,9 @@ export { GetCurrencyBalance } from "./chain/get_currency_balance";
 // dappservices
 export * from "./dappservices";
 
+// dappservices
+export * from "./dappairhodl1";
+
 // eosio
 export { Action } from "./eosio/action_trace";
 
