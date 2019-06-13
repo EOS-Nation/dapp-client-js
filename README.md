@@ -1,5 +1,9 @@
 # DAPP JavaScript/TypeScript Client Library
 
+[![Build Status](https://travis-ci.org/EOS-Nation/dapp-client-js.svg?branch=master)](https://travis-ci.org/EOS-Nation/dapp-client-js)
+[![npm version](https://badge.fury.io/js/dapp-client.svg)](https://badge.fury.io/js/dapp-client)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/EOS-Nation/dapp-client-js/master/LICENSE)
+
 > General purpose library for the DAPP network
 
 ## Installation
