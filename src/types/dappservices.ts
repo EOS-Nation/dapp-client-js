@@ -11,6 +11,7 @@ export interface Accountext {
   pending_package: string;
   package_started: number;
   package_end: number;
+  status?: string;
 }
 
 export interface Package {
